@@ -1,25 +1,25 @@
 #include <iostream>
+#include <cstdint>
 
-short int getSumOfDigits (long long number) {
-  short int summ = 0;
-  while (number > 0) {
-    summ += number % 10;
-    number /= 10;
+uint32_t getSumOfDigits (uint64_t number) {
+  uint32_t summ = 0;
+  for (; number > 0; number /= 10) {
+    summ += (number % 10);
   }
   return summ;
 }
 
 int main() {
-  std::cout << "Please, enter a number: ";
-  long long number;
+  std::cout << "Please, enter a number (I will find the best divider): ";
+  uint64_t number;
   std::cin >> number;
 
-  long long bestDivider = number;
-  short int sumOfDigits = getSumOfDigits(number);
+  uint64_t bestDivider = number;
+  uint32_t sumOfDigits = getSumOfDigits(number);
 
-  for (size_t i = 1; i < (number / 2) + 1; ++i) {
+  for (size_t i = 1; i <= (number / 2); ++i) {
     if (((number % i) == 0) && (getSumOfDigits(i) > sumOfDigits)) {
-        bestDivider = i;
+      bestDivider = i;
     }
   }
 

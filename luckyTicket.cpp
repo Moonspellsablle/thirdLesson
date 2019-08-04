@@ -9,18 +9,25 @@ int main() {
   uint32_t summ_first_part = 0;
   uint32_t summ_second_part = 0;
 
-  uint16_t countOfDigitsInHalfNumber;
   uint16_t countOfDigitsInNumber = 1;
 
   uint64_t tmp = number;
   while ((tmp / 10) != 0) {
     ++countOfDigitsInNumber;
-    countOfDigitsInHalfNumber = countOfDigitsInNumber / 2;
     tmp /= 10;
   }
+  if (countOfDigitsInNumber != 6) {
+    std::cout << "Ticket must include only 6 digit. Please, try again later." << std::endl;
+    return 0;
+  }
+  uint16_t countOfDigitsInHalfNumber = countOfDigitsInNumber / 2;
 
   for(size_t count = 0; number > 0; ++count) {
-    (count < (countOfDigitsInHalfNumber)) ? summ_second_part += (number % 10) : summ_first_part += (number % 10);
+    if (count < (countOfDigitsInHalfNumber)) {
+      summ_second_part += (number % 10);
+    } else {
+      summ_first_part += (number % 10);
+    }
     number /= 10;
   }
 

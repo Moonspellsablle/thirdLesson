@@ -1,22 +1,20 @@
-#include<iostream>
+#include <iostream>
+#include <cstdint>
 
 int main() {
-  int bottom_leafs_count;
+  uint16_t bottom_leafs_count;
   std::cout << "Enter count of bottom leafs for christmas-tree: " << std::endl;
   std::cin >> bottom_leafs_count;
 
-  const short int MAGIC_NUMBER = 2;
+  bottom_leafs_count += (bottom_leafs_count % 2 == 0);
 
-  if (bottom_leafs_count % MAGIC_NUMBER == 0) {
-      bottom_leafs_count += 1;
+  for (size_t line_asterisks_count = 1; line_asterisks_count <= bottom_leafs_count; line_asterisks_count += 2) {
+    uint16_t half_of_empty_space_count = ((bottom_leafs_count - line_asterisks_count) / 2);
+    for (size_t i = 0; i < (half_of_empty_space_count + line_asterisks_count); ++i) {
+      std::cout << ((i < half_of_empty_space_count) ? " " : "*");
+    }
+    std::cout << std::endl;
   }
 
-  std::string tree = "";
-  for (size_t line_trees_count = 1; line_trees_count <= bottom_leafs_count; line_trees_count += MAGIC_NUMBER) {
-    std::string half_of_empty_space = std::string(((bottom_leafs_count - line_trees_count) / MAGIC_NUMBER), ' ');
-    std::string leafs = std::string(line_trees_count, '*');
-    tree += half_of_empty_space + leafs + "\n";
-  }
-  std::cout << tree;
   return 0;
 }

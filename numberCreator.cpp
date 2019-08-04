@@ -1,40 +1,27 @@
 #include <iostream>
-#include <string>
+#include <cstdint>
 
 int main() {
-  std::cout << "Please, enter a count of input elements: ";
-  short int countOfElements;
+  std::cout << "Please, enter a count of input elements, and after that - input your numbers (I will find if this numbers can divide to 3): ";
+  uint16_t countOfElements;
   std::cin >> countOfElements;
 
-  std::string allElementsData = "";
-  std::cout << "Please, enter elements separeted by space: ";
-  for (size_t i = 0; i < countOfElements; ++i) {
-      int temp;
-      std::cin >> temp;
-      allElementsData += std::to_string(temp);
-  }
+  uint16_t valueOfUserData;
+  uint32_t result = 0;
 
-  bool isSuccessfullResult = false;
-  std::string tempAllElementsData = allElementsData;
-  for (size_t i = 0; i < allElementsData.length(); ++i) {
-    for (size_t j = (i + 1); j < allElementsData.length(); ++j) {
-      if (j < allElementsData.length()) {
-        std::swap(tempAllElementsData[i], tempAllElementsData[j]);
-        if ((tempAllElementsData[0] != '0') && ((std::stoi(tempAllElementsData) % 3) == 0)) {
-          isSuccessfullResult = true;
-          break;
-          //std::cout << "Result: " << tempAllElementsData << std::endl;
-        }
-        tempAllElementsData = allElementsData;
+  for (size_t i = 0; i < countOfElements; ++i) {
+    uint32_t divider = 10;
+    std::cin >> valueOfUserData;
+    while (1) {
+      if (valueOfUserData < (divider / 10)) {
+        break;
       }
+      result = result + (valueOfUserData % divider) / (divider / 10);
+      divider = divider * 10;
     }
   }
-  
-  if (isSuccessfullResult) {
-    std::cout << "Yes" << std::endl;
-  } else {
-    std::cout << "No" << std::endl;
-  }
+
+  std::cout << ((result % 3) ? "No\n" : "Yes\n");
 
   return 0;
 }

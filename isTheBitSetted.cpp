@@ -1,14 +1,13 @@
 #include <iostream>
+#include <cstdint>
 
 int main() {
-  unsigned long int userDataVariable;
-  short int userDataShift;
-  std::cout << "Please, enter number and bit shift, separated by a space: ";
-  std::cin >> userDataVariable;
-  std::cin >> userDataShift;
-  if ((userDataVariable >> (userDataShift - 1)) & 1) {
-    std::cout << "Yes" << std::endl;
-  } else {
-    std::cout << "No" << std::endl;
-  }
+  uint64_t userDataVariable;
+  uint16_t userDataShift;
+  std::cout << "Please, enter number and bit shift, separated by a space: (I will find, if the bit is setted): ";
+  std::cin >> userDataVariable >> userDataShift;
+  bool isBitSetted = (((userDataVariable >> (userDataShift - 1)) & 1) && (userDataShift > 0));
+  std::cout << (isBitSetted ? "Yes\n" : "No\n");
+
+  return 0;
 }

@@ -1,20 +1,31 @@
 #include <iostream>
 #include <cstdint>
+#include <cmath> 
 
 int main() {
   std::cout << "Please, enter a number (I will revert it): ";
   int32_t number;
   std::cin >> number;
 
-  if (number < 0) {
-    std::cout << "-";
+  bool isNumberNegative = (number < 0) ? true : false;
+  if (isNumberNegative) {
     number *= -1;
   }
 
-  for (; (number > 0); (number /= 10)) {
-    std::cout << (number % 10);
+  int16_t countOfDigitsInNumber;
+  int32_t resultNumber = number;
+  for (countOfDigitsInNumber = 0; resultNumber != 0; ++countOfDigitsInNumber) {
+    resultNumber /= 10;
   }
 
+  int16_t multiplier;
+  resultNumber = 0;
+
+  for (multiplier = --countOfDigitsInNumber; multiplier >= 0; --multiplier, number /= 10) {
+    resultNumber += (number % 10) * pow(10, multiplier);
+  }
+
+  std::cout << (isNumberNegative ? resultNumber * (-1) : resultNumber);
   std::cout << std::endl;
 
   return 0;

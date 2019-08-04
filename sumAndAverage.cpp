@@ -1,20 +1,21 @@
 #include <iostream>
+#include <cstdint>
+
 
 int main() {
-  std::cout << "Please, enter a number: ";
-  uint number;
+  std::cout << "Please, enter a number (I will calculate summ, and average of digits in your number): ";
+  uint32_t number;
   std::cin >> number;
 
-  uint count = 0;
-  uint summ = 0;
-  while (number > 0) {
+  uint16_t count = 0;
+  uint32_t summ = 0;
+
+  for (; (number > 0); ++count, number /= 10) {
     summ += number % 10;
-    number /= 10;
-    count += 1;
   }
 
   std::cout << "Sum: " << summ << std::endl;
-  std::cout << "Average: " << (summ / float(count)) << std::endl;
+  std::cout << "Average: " << (summ / count + 0.f) << std::endl;
 
   return 0;
 }

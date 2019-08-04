@@ -16,8 +16,9 @@ int main() {
 
   uint64_t bestDivider = number;
   uint32_t sumOfDigits = getSumOfDigits(number);
+  const uint64_t halfOfNumber = number / 2;
 
-  for (size_t i = 1; i <= (number / 2); ++i) {
+  for (size_t i = 1; i <= halfOfNumber; ++i) {
     if (((number % i) == 0) && (getSumOfDigits(i) > sumOfDigits)) {
       bestDivider = i;
     }

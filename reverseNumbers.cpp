@@ -1,26 +1,21 @@
 #include <iostream>
+#include <cstdint>
 
 int main() {
-  std::cout << "Please, enter a number: ";
-  int number;
+  std::cout << "Please, enter a number (I will revert it): ";
+  int32_t number;
   std::cin >> number;
 
-  bool isPositive = true;
   if (number < 0) {
-    isPositive = false;
+    std::cout << "-";
     number *= -1;
   }
 
-  std::string reverseNumber = "";
-  while((number % 10) != 0) {
-    reverseNumber += std::to_string(number % 10);
-    number /= 10;
+  for (; (number > 0); (number /= 10)) {
+    std::cout << (number % 10);
   }
 
-  if (!isPositive) {
-      reverseNumber = "-" + reverseNumber;
-  }
-  std::cout << reverseNumber << std::endl;
+  std::cout << std::endl;
 
   return 0;
 }

@@ -1,29 +1,30 @@
 #include <iostream>
+#include <cstdint>
 
 int main() {
   std::cout << "Please, enter a ticket number: ";
-  int number;
+  uint64_t number;
   std::cin >> number;
 
-  short int summ_first_part = 0;
-  short int summ_second_part = 0;
-  const short int COUNT_OF_DIGITS_IN_HALF_NUMBER = 3;
-  const short int MAGIC_CONST = 10;
+  uint32_t summ_first_part = 0;
+  uint32_t summ_second_part = 0;
+
+  uint16_t countOfDigitsInHalfNumber;
+  uint16_t countOfDigitsInNumber = 1;
+
+  uint64_t tmp = number;
+  while ((tmp / 10) != 0) {
+    ++countOfDigitsInNumber;
+    countOfDigitsInHalfNumber = countOfDigitsInNumber / 2;
+    tmp /= 10;
+  }
 
   for(size_t count = 0; number > 0; ++count) {
-    if (count < (COUNT_OF_DIGITS_IN_HALF_NUMBER)) {
-      summ_second_part += number % MAGIC_CONST;
-    } else {
-      summ_first_part += number % MAGIC_CONST;
-    }
-    number /= MAGIC_CONST;
+    (count < (countOfDigitsInHalfNumber)) ? summ_second_part += (number % 10) : summ_first_part += (number % 10);
+    number /= 10;
   }
 
-  if (summ_first_part == summ_second_part) {
-    std::cout << "Your ticket is lucky" << std::endl;
-  } else {
-    std::cout << "Your ticket is not lucky" << std::endl;
-  }
+  std::cout << ((summ_first_part == summ_second_part) ? "Your ticket is lucky\n" : "Your ticket is not lucky\n");
 
   return 0;
 }

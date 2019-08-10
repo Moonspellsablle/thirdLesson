@@ -13,7 +13,7 @@ int main() {
     uint32_t divider = 10;
     std::cin >> valueOfUserData;
     while (!(valueOfUserData < (divider / 10))) {
-      result = result + (valueOfUserData % divider) / (divider / 10);
+      result += (valueOfUserData % divider) / (divider / 10);
       divider = divider * 10;
     }
   }

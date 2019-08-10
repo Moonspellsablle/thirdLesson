@@ -12,10 +12,7 @@ int main() {
   for (size_t i = 0; i < countOfElements; ++i) {
     uint32_t divider = 10;
     std::cin >> valueOfUserData;
-    while (1) {
-      if (valueOfUserData < (divider / 10)) {
-        break;
-      }
+    while (!(valueOfUserData < (divider / 10))) {
       result = result + (valueOfUserData % divider) / (divider / 10);
       divider = divider * 10;
     }

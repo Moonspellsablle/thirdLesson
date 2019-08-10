@@ -7,7 +7,7 @@ int main() {
   int32_t number;
   std::cin >> number;
 
-  bool isNumberNegative = (number < 0) ? true : false;
+  bool isNumberNegative = (number < 0);
   if (isNumberNegative) {
     number *= -1;
   }
@@ -18,10 +18,9 @@ int main() {
     resultNumber /= 10;
   }
 
-  int16_t multiplier;
   resultNumber = 0;
 
-  for (multiplier = --countOfDigitsInNumber; multiplier >= 0; --multiplier, number /= 10) {
+  for (int16_t multiplier = --countOfDigitsInNumber; multiplier >= 0; --multiplier, number /= 10) {
     resultNumber += (number % 10) * pow(10, multiplier);
   }
 
